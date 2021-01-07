@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/role-supports-aria-props */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [showDropDown, setShow] = useState(false);
@@ -26,56 +26,43 @@ function Header() {
         <div className="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="/">
+              <Link to="/" className="nav-link">
                 Home
                 <span className="sr-only">(current)</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/shoppingcart">
+              <Link to="/shoppingcart" className="nav-link">
                 Shopping Cart
-              </a>
+              </Link>
             </li>
-            {/* <li className="nav-item">
-              <a
-                className="nav-link"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-              >
-                Disabled
-              </a>
-            </li> */}
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
                 id="dropdown01"
-                data-toggle="dropdown"
                 aria-haspopup="true"
-                //   using a hook to control dropdown behaviour instead of bootstraps js
                 aria-expanded={showDropDown === true ? 'true' : 'false'}
                 onClick={() => setShow(!showDropDown)}
               >
                 Username
               </a>
               <div
-                //   using a hook to control dropdown behaviour instead of bootstraps js
                 className={
                   showDropDown === true ? 'dropdown-menu show' : 'dropdown-menu'
                 }
                 aria-labelledby="dropdown01"
                 onClick={() => setShow(!showDropDown)}
               >
-                <a className="dropdown-item" href="/orders">
+                <Link to="/orders" className="dropdown-item">
                   My Orders
-                </a>
-                <a className="dropdown-item" href="/adminorders">
+                </Link>
+                <Link to="/admin-orders" className="dropdown-item">
                   Manage Orders
-                </a>
-                <a className="dropdown-item" href="/adminproducts">
+                </Link>
+                <Link to="/admin-products" className="dropdown-item">
                   Manage Products
-                </a>
+                </Link>
                 <a className="dropdown-item" href="#">
                   Log Out
                 </a>
