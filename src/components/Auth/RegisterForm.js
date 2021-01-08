@@ -15,7 +15,6 @@ function RegisterForm() {
 
   const onSubmit = () => {
     setSubmitted(true);
-    console.log('submit');
   };
 
   const onChange = (event) => {
@@ -23,7 +22,7 @@ function RegisterForm() {
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   };
 
-  var inputsList = placeHolders.map(function (placeHolder, index) {
+  let inputsList = placeHolders.map(function (placeHolder, index) {
     return (
       <div classname="form-group">
         <input
