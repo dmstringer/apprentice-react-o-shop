@@ -1,20 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { registerActions } from '../../store/register/actions';
+import { useDispatch } from 'react-redux';
 
 function RegisterForm() {
   const [inputs, setInputs] = useState({
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     username: '',
     password: '',
   });
+
+  const inputsEmpty = Object.values(inputs).every(
+    (x) => x === null || x === ''
+  );
 
   const placeHolders = ['First Name', 'Last Name', 'Username', 'Password'];
 
   const [submitted, setSubmitted] = useState(false);
 
-  const onSubmit = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(registerActions.logout());
+  }, [dispatch]);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
     setSubmitted(true);
+
+    if (!inputsEmpty) {
+      dispatch(registerActions.register(inputs));
+    }
   };
 
   const onChange = (event) => {

@@ -6,19 +6,17 @@ const initialState = user ? { loggedIn: true, user } : {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actions.LOGIN_REQUEST:
+    case actions.REGISTER_REQUEST:
       return {
-        loggingIn: true,
+        registering: true,
         user: action.user,
       };
-    case actions.LOGIN_SUCCESS:
+    case actions.REGISTER_SUCCESS:
       return {
-        LoggedIn: true,
+        registered: true,
         user: action.user,
       };
-    case actions.LOGIN_FAILURE:
-      return {};
-    case actions.LOGOUT:
+    case actions.REGISTER_FAILURE:
       return {};
     default:
       return state;
