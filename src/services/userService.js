@@ -35,7 +35,7 @@ function register(user) {
   return fetch('/users/register', requestOptions)
     .then(handleResponse)
     .then((user) => {
-      localStorage.setItem('user', JSON.stringify(user));
+      //localStorage.setItem('user', JSON.stringify(user));
 
       return user;
     });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { registerActions } from '../../store/register/actions';
 import { useDispatch } from 'react-redux';
@@ -11,9 +11,7 @@ function RegisterForm() {
     password: '',
   });
 
-  const inputsEmpty = Object.values(inputs).every(
-    (x) => x === null || x === ''
-  );
+  const { firstName, lastName, username, password } = inputs;
 
   const placeHolders = ['First Name', 'Last Name', 'Username', 'Password'];
 
@@ -21,16 +19,12 @@ function RegisterForm() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(registerActions.logout());
-  }, [dispatch]);
-
   const onSubmit = (event) => {
     event.preventDefault();
 
     setSubmitted(true);
 
-    if (!inputsEmpty) {
+    if (firstName && lastName && username && password) {
       dispatch(registerActions.register(inputs));
     }
   };
@@ -42,12 +36,13 @@ function RegisterForm() {
 
   let inputsList = placeHolders.map(function (placeHolder, index) {
     return (
-      <div classname="form-group">
+      <div className="form-group" key={placeHolder + 'div'}>
         <input
           type="text"
           name={Object.keys(inputs)[index]}
           placeholder={placeHolder}
           value={Object.values(inputs)[index]}
+          key={placeHolder}
           onChange={onChange}
           className={
             'form-control' +
@@ -55,7 +50,9 @@ function RegisterForm() {
           }
         />
         {submitted && !Object.values(inputs)[index] && (
-          <div className="invalid-feedback">{placeHolder} is required</div>
+          <div className="invalid-feedback" key={index}>
+            {placeHolder} is required
+          </div>
         )}
       </div>
     );
