@@ -25,7 +25,6 @@ function logout() {
 }
 
 function register(user) {
-  //code goes here
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -35,8 +34,6 @@ function register(user) {
   return fetch('/users/register', requestOptions)
     .then(handleResponse)
     .then((user) => {
-      //localStorage.setItem('user', JSON.stringify(user));
-
       return user;
     });
 }
