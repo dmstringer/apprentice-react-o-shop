@@ -13,7 +13,7 @@ function RegisterForm() {
 
   const { firstName, lastName, username, password } = inputs;
 
-  const placeHolders = ['First Name', 'Last Name', 'Username', 'Password'];
+  const formValues = ['First Name', 'Last Name', 'Username', 'Password'];
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -34,15 +34,15 @@ function RegisterForm() {
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   };
 
-  let inputsList = placeHolders.map(function (placeHolder, index) {
+  let inputsList = formValues.map(function (formValue, index) {
     return (
-      <div className="form-group" key={placeHolder + 'div'}>
+      <div className="form-group" key={formValue + 'div'}>
         <input
           type="text"
           name={Object.keys(inputs)[index]}
-          placeholder={placeHolder}
+          placeholder={formValue}
           value={Object.values(inputs)[index]}
-          key={placeHolder}
+          key={formValue}
           onChange={onChange}
           className={
             'form-control' +
@@ -51,7 +51,7 @@ function RegisterForm() {
         />
         {submitted && !Object.values(inputs)[index] && (
           <div className="invalid-feedback" key={index}>
-            {placeHolder} is required
+            {formValue} is required
           </div>
         )}
       </div>
