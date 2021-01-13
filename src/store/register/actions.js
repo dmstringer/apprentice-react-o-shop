@@ -1,4 +1,4 @@
-import actionTypes from './actionTypes';
+import actionTypes from '../../store/register/actionTypes';
 import { userService } from '../../services/userService';
 import history from '../../utils/history';
 
