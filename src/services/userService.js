@@ -17,6 +17,9 @@ function login(username, password) {
       localStorage.setItem('user', JSON.stringify(user));
 
       return user;
+    })
+    .catch((error) => {
+      console.error('Error:', error)
     });
 }
 
@@ -35,6 +38,9 @@ function register(user) {
     .then(handleResponse)
     .then((user) => {
       return user;
+    })
+    .catch((error) => {
+      console.error('Error:', error)
     });
 }
 
