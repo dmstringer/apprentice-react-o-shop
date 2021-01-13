@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { registerActions } from '../../store/register/actions';
+import { useDispatch } from 'react-redux';
 
 function RegisterForm() {
   const [inputs, setInputs] = useState({
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     username: '',
     password: '',
   });
 
-  const placeHolders = ['First Name', 'Last Name', 'Username', 'Password'];
+  const { firstName, lastName, username, password } = inputs;
+
+  const formValues = ['First Name', 'Last Name', 'Username', 'Password'];
 
   const [submitted, setSubmitted] = useState(false);
 
-  const onSubmit = () => {
+  const dispatch = useDispatch();
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
     setSubmitted(true);
+
+    if (firstName && lastName && username && password) {
+      dispatch(registerActions.register(inputs));
+    }
   };
 
   const onChange = (event) => {
@@ -22,14 +34,15 @@ function RegisterForm() {
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   };
 
-  let inputsList = placeHolders.map(function (placeHolder, index) {
+  let inputsList = formValues.map(function (formValue, index) {
     return (
-      <div classname="form-group">
+      <div className="form-group" key={formValue + 'div'}>
         <input
           type="text"
           name={Object.keys(inputs)[index]}
-          placeholder={placeHolder}
+          placeholder={formValue}
           value={Object.values(inputs)[index]}
+          key={formValue}
           onChange={onChange}
           className={
             'form-control' +
@@ -37,7 +50,9 @@ function RegisterForm() {
           }
         />
         {submitted && !Object.values(inputs)[index] && (
-          <div className="invalid-feedback">{placeHolder} is required</div>
+          <div className="invalid-feedback" key={index}>
+            {formValue} is required
+          </div>
         )}
       </div>
     );

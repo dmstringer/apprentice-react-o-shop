@@ -6,7 +6,6 @@ export function configureFakeBackend() {
   window.fetch = function (url, opts) {
     const { method, headers } = opts;
     const body = opts.body && JSON.parse(opts.body);
-
     return new Promise((resolve, reject) => {
       // wrap in timeout to simulate server api call
       setTimeout(handleRoute, 500);

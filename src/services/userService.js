@@ -17,6 +17,9 @@ function login(username, password) {
       localStorage.setItem('user', JSON.stringify(user));
 
       return user;
+    })
+    .catch((error) => {
+      console.error('Error:', error)
     });
 }
 
@@ -25,7 +28,20 @@ function logout() {
 }
 
 function register(user) {
-  //code goes here
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  };
+
+  return fetch('/users/register', requestOptions)
+    .then(handleResponse)
+    .then((user) => {
+      return user;
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    });
 }
 
 function handleResponse(response) {
