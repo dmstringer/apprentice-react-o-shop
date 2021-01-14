@@ -2,9 +2,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Header() {
   const [showDropDown, setShow] = useState(false);
+
+  const fullName = useSelector(
+    (state) => state.login.user.firstName + ' ' + state.login.user.lastName
+  );
 
   return (
     <header>
@@ -45,7 +50,7 @@ function Header() {
                 aria-expanded={showDropDown === true ? 'true' : 'false'}
                 onClick={() => setShow(!showDropDown)}
               >
-                Username
+                {fullName}
               </a>
               <div
                 className={

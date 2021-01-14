@@ -5,6 +5,7 @@ import ShoppingCart from '../../pages/ShoppingCart';
 import CheckOut from '../../pages/CheckOut';
 import Orders from '../../pages/Orders';
 import AdminProducts from '../../pages/AdminProducts';
+import NewProduct from '../../pages/NewProduct';
 import AdminOrders from '../../pages/AdminOrders';
 import { Route, Switch } from 'react-router';
 
@@ -18,6 +19,7 @@ function Main() {
         <Route exact path="/checkout" component={CheckOut}></Route>
         <Route exact path="/orders" component={Orders}></Route>
         <Route exact path="/admin-products" component={AdminProducts}></Route>
+        <Route exact path="/admin-products/new" component={NewProduct}></Route>
         <Route exact path="/admin-orders" component={AdminOrders}></Route>
       </Switch>
     </div>
