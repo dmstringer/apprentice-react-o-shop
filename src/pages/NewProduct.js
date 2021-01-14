@@ -36,7 +36,6 @@ function NewProduct() {
   const onChange = (event) => {
     const { name, value } = event.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
-    console.log(inputs);
   };
 
   let optionList = optionValues.map(function (optionValue, index) {
