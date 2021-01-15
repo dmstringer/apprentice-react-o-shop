@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { addproductActions } from '../store/product/actions';
 import { useDispatch } from 'react-redux';
 
 function NewProduct() {
@@ -28,8 +29,7 @@ function NewProduct() {
     event.preventDefault();
     setSubmitted(true);
     if (title && price && category && imageURL) {
-      //proper dispatch code to come
-      //dispatch(registerActions.register(inputs));
+      dispatch(addproductActions.addProduct(inputs));
     }
   };
 
@@ -55,12 +55,12 @@ function NewProduct() {
     return (
       <div className="form-group" key={formValue + 'div'}>
         <label
-          for={
+          htmlFor={
             formValue === 'Category'
               ? 'select' + formValue
               : 'input' + formValue
           }
-          classNmae="form-label"
+          className="form-label"
         >
           {formValue}
         </label>
@@ -69,26 +69,37 @@ function NewProduct() {
           <select
             id={'select' + formValue}
             name={Object.keys(inputs)[index]}
-            value={Object.values(inputs)[index]}
+            // value={Object.values(inputs)[index]}
+            defaultValue=""
             key={formValue}
             onChange={onChange}
             className="form-select"
           >
+            <option value="" disabled hidden>
+              Choose a catagory
+            </option>
             {optionList}
           </select>
         ) : (
-          <input
-            type="text"
-            id={'input' + formValue}
-            name={Object.keys(inputs)[index]}
-            value={Object.values(inputs)[index]}
-            key={formValue}
-            onChange={onChange}
-            className={
-              'form-control' +
-              (submitted && !Object.values(inputs)[index] ? ' is-invalid' : '')
-            }
-          />
+          <div className="input-group">
+            {formValue === 'Price' && (
+              <span className="input-group-text">$</span>
+            )}
+            <input
+              type="text"
+              id={'input' + formValue}
+              name={Object.keys(inputs)[index]}
+              value={Object.values(inputs)[index]}
+              key={formValue}
+              onChange={onChange}
+              className={
+                'form-control' +
+                (submitted && !Object.values(inputs)[index]
+                  ? ' is-invalid'
+                  : '')
+              }
+            />
+          </div>
         )}
 
         {submitted && !Object.values(inputs)[index] && (
