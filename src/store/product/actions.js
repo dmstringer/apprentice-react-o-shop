@@ -13,7 +13,7 @@ function addProduct(product) {
     productService.addProduct(product).then(
       (product) => {
         dispatch({ type: actionTypes.ADD_PRODUCT_SUCCESS, product });
-        history.push('/');
+        history.push('/admin-products');
       },
       (error) => {
         console.log(error);
